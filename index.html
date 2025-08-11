@@ -1,15 +1,10 @@
-<!-- Copyright © 2025 Entre Alas. Todos los derechos reservados. Prohibida la reproducción sin permiso. -->
-<!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Entre Alas - Tu Opinión Cuenta</title>
     <link rel="stylesheet" href="stylo.css">
-    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <title>Entre Alas - Tu Opinión Cuenta</title>
 </head>
-
 <body>
     <div class="container" id="mainContainer">
         <div class="header">
@@ -22,16 +17,24 @@
             <div class="anonymous-badge" id="anonymousBadge">
                 🔒 Anónimo
             </div>
-            <form id="feedbackForm">
+            <form id="feedbackForm" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="_subject" value="Nuevo Feedback - Entre Alas">
+                <input type="hidden" name="from_name" value="Entre Alas Feedback">
+                <input type="text" name="_honeypot" class="honeypot" tabindex="-1" autocomplete="off">
+
                 <div class="form-group">
                     <label for="codigo_pedido">📌 Código de Pedido (opcional):</label>
-                    <input type="text" name="codigo_pedido" id="codigo_pedido" placeholder="Ejemplo: EA-0825-123">
+                    <input
+                        type="text"
+                        name="codigo_pedido"
+                        id="codigo_pedido"
+                        placeholder="Ejemplo: EA-0825-123"
+                    >
                     <div class="error-message" id="codigoError"></div>
                 </div>
 
                 <div class="form-group rating-group">
-                    <label for="calificacion">⭐ Califica tu experiencia: <span
-                            class="required-asterisk">*</span></label>
+                    <label for="calificacion">⭐ Califica tu experiencia: <span class="required-asterisk">*</span></label>
                     <div class="rating-stars">
                         <input type="radio" name="calificacion" id="star5" value="5" class="rating-star" required>
                         <label for="star5">★</label>
@@ -52,7 +55,7 @@
                         <option value="" disabled selected>Selecciona una opción</option>
                         <option value="alitas">Alitas</option>
                         <option value="boneless">Boneless</option>
-                        <option value="hamburguesas">Hamburguesas Smash</option>
+                        <option value="hamburguesa_smass">Hamburguesa Smash</option>
                         <option value="papas_fritas">Papas Fritas</option>
                         <option value="otro">Otro</option>
                     </select>
@@ -72,8 +75,12 @@
                 <div class="form-group">
                     <label for="mensaje">💬 Cuéntanos tu experiencia: <span class="required-asterisk">*</span></label>
                     <div class="textarea-container">
-                        <textarea name="mensaje" id="mensaje" required
-                            placeholder="¿Cómo estuvieron nuestras alitas? ¿Qué tal el servicio? ¿Algo que podamos mejorar?"></textarea>
+                        <textarea
+                            name="mensaje"
+                            id="mensaje"
+                            required
+                            placeholder="¿Cómo estuvieron nuestras alitas? ¿Qué tal el servicio? ¿Algo que podamos mejorar?"
+                        ></textarea>
                     </div>
                     <div class="emoji-suggestions">
                         <button type="button" class="emoji-btn" onclick="addEmoji('😋')">😋</button>
@@ -103,44 +110,10 @@
         <div class="success-content">
             <div class="success-emoji">🎉🍗</div>
             <h2>¡Gracias por tu comentario!</h2>
-            <p>Tu opinión nos ayuda a mejorar. ¡Ahora gira la ruleta y gana un premio!</p>
-
-            <div class="roulette-container">
-                <div class="roulette-pointer"></div>
-                <svg class="roulette-wheel" id="rouletteWheel" viewBox="0 0 300 300">
-                    <!-- Las secciones se generarán dinámicamente con JavaScript -->
-                </svg>
-            </div>
-
-            <!-- Botón MOVIDO FUERA del contenedor de la ruleta -->
-            <button class="spin-btn" id="spinBtn">¡GIRAR RULETA!</button>
-            
-            <div class="prize-result" id="prizeResult">
-                <div class="prize-title" id="prizeTitle"></div>
-                <div class="prize-code" id="prizeCode"></div>
-                <div class="prize-description" id="prizeDescription"></div>
-                <button class="copy-code-btn" id="copyCodeBtn">📋 Copiar Código</button>
-            </div>
+            <p>Tu opinión nos ayuda a mejorar. ¡Seguimos cocinando!</p>
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
-
-<script>
-  document.addEventListener("contextmenu", function (e) {
-    e.preventDefault();
-  });
-
-  document.addEventListener("keydown", function (e) {
-    if (
-      e.key === "F12" ||
-      (e.ctrlKey && e.shiftKey && e.key === "I") ||
-      (e.ctrlKey && e.shiftKey && e.key === "J") ||
-      (e.ctrlKey && e.key === "U") || (e.key === "F5")
-    ) {
-      e.preventDefault();
-    }
-  });
-</script>
-
-<script defer src="script.js"></script>
 </html>
